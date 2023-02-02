@@ -11,7 +11,7 @@ Instalação de dependencias
 Iniciar Jest
 
     yarn jest --init 
-    npm jest --init 
+    npx jest --init 
 
 jest.config.ts
 

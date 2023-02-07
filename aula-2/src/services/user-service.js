@@ -1,7 +1,4 @@
 const db = require('../database')
-
-
-
 class UserService {
     static signUp({ nome, cpf, email }) {
         return db.create({
@@ -12,7 +9,12 @@ class UserService {
     }
 
     static userExists(cpf) {
-        return db.findByCPF(cpf)
+        const user = db.findByCPF(cpf)
+        if(!user) {
+            return false
+        }
+
+        return true
     }
 }
 

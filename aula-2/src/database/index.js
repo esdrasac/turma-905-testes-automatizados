@@ -7,7 +7,10 @@ const db = {
 }
 
 module.exports = {
-    findByCPF: (cpf) => db[cpf] || null,
+    findByCPF: (cpf) => {
+        console.log('Implementação Original')
+        return db[cpf] || null
+    }, 
     create: ({ nome, cpf, email }) => {
         db[cpf] = {
             nome,

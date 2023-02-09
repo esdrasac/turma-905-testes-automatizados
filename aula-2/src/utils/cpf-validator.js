@@ -1,5 +1,9 @@
 const { cpf: cpfValidator } = require('cpf-cnpj-validator')
 
-module.exports = (cpf) => {
-    return cpfValidator.isValid(cpf)
+class CpfValidator {
+    static isValid(cpf) {
+        return cpfValidator.isValid(cpf)
+    }
 }
+
+module.exports = CpfValidator

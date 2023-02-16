@@ -1,0 +1,16 @@
+Story: Criar um usuário
+
+Funcionalidade: Eu como usuário quero acessar a plaforma, preencher meus dados pessoais
+e criar minha conta.
+
+Cenário: Registrar com sucesso
+    Dado que estou na página de cadastro de usuários
+    Quando informar um email válido
+    E uma senha válida
+    E informar um nome
+    Então recebo um email para confirmação de endereço
+
+Cenário: Confirmação de email
+    Dado que recebo o email de confirmação
+    Quando cliclo no link de confirmação
+    Então sou redirecionado para a pagina de login

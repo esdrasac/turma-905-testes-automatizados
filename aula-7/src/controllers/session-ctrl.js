@@ -1,10 +1,11 @@
+const SessionService = require('../services/session-service')
 const UserService = require('../services/user-service')
 const Email = require('../utils/email-validator')
 
-class UserController {
+class SessionController {
     static async create(req, res) {
         try {
-            const { name, email, password } = req.body
+            const { email, password } = req.body
     
             if(!Email.isValid(email)) {
                 throw { status: 400, message: 'Email inválido'}
@@ -13,21 +14,18 @@ class UserController {
             if(!password) {
                 throw { status: 400, message: 'Senha inválida'}
             }
-    
-            const { id } = await UserService.createUser({ name, email, password })
 
-            return res.status(200).json({ id })
+            if(!await UserService.userExistsAndCheckPassword({ email, password })) {
+                throw { status: 404, message: 'Usuário não encontrado' }
+            }
+    
+            const token = await SessionService.generateToken({ email })
+
+            return res.status(200).json({ token })
         } catch (error) {
             return res.status(error.status || 500).json(error.message || 'Server Error')
         }
     }
-
-    static async changePassword(req, res) {
-        const { userEmail: email } = req
-        
-        console.log('Alterando senha...')
-        return res.status(200).json({ message: 'ok'})
-    }
 }
 
-module.exports = UserController
+module.exports = SessionController

@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     const [, token ] = req.headers.authorization.split(' ')
 
     try {
-        const decoded = await jwt.verify(token, 'abc')
+        const decoded = await jwt.verify(token, process.env.SECRET_KEY)
 
         console.log(decoded)
 
